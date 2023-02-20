@@ -1,0 +1,50 @@
+.MultiCarousel {
+  float: left;
+  overflow: hidden;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+}
+.MultiCarousel .MultiCarousel-inner {
+  transition: 1s ease all;
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item {
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > .card > img {
+  height: 350px;
+  width: 100%;
+}
+.MultiCarousel .MultiCarousel-inner .item > div {
+  text-align: center;
+  width: 205px;
+  margin: 10px;
+  color: #666;
+  border: 1px solid white;
+}
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  top: calc(50% - 55px);
+  background-color: #070707;
+  border-color: #f0f0f0;
+  border-style: solid;
+  height: 40px;
+  width: 30px;
+  font-size: 25px;
+  border-radius: 20%;
+  opacity: 10;
+}
+.MultiCarousel .leftLst {
+  left: 0;
+}
+.MultiCarousel .rightLst {
+  right: 0;
+}
+
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+  pointer-events: none;
+}
