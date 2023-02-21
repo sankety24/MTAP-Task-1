@@ -22,7 +22,7 @@ const Cart_single_Item = ({ elem, Update }) => {
     console.log(fullPrice);
   }
   const handleSubmit = (todoID) => {
-    fetch(`http://localhost:8025/todo/delete/${todoID}`, {
+    fetch(`http://localhost:8026/todo/delete/${todoID}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
@@ -39,7 +39,7 @@ const Cart_single_Item = ({ elem, Update }) => {
       quantity: Number(val),
     };
     console.log(data, typeof data.price, typeof data.quantity);
-    fetch(`http://localhost:8025/todo/update/${todoID}`, {
+    fetch(`http://localhost:8026/todo/update/${todoID}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: {

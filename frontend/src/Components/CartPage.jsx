@@ -24,50 +24,60 @@ import "./CartPage.css";
 import { useEffect } from "react";
 import { useState } from "react";
 import Cart_single_Item from "./Cart_single_Item";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartPage = () => {
   const navigate = useNavigate();
   
-  const [data, setData] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
-  const [sumo, setsum] = useState(1);
-  const handleSubmit = (todoID) => {
-    fetch(`http://localhost:8025/todo/delete/${todoID}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
-      },
-    });
-  };
-
-  console.log("ram");
-  useEffect(() => {
-    fetch("http://localhost:8025/todo", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res);
-        // setLoading(false);
-        console.log(res);
-      })
-      .catch((er) => {
-        console.log(er);
-        // setError(true);
-        // setLoading(false);
+  // const [data, setData] = useState([]);
+    const data = useSelector((state) => state.cartData);
+    const [sumo, setsum] = useState(1);
+    console.log(data);
+    
+    // console.log("ram");
+    const handleSubmit = (todoID) => {
+      fetch(`http://localhost:8026/todo/delete/${todoID}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
+        },
       });
+      // const handleDelete = (name) => {
+      //   setCart(deleteData(name, "Cart"));
+      //   toast({
+      //     title: "Delete Successfull.",
+      //     status: "success",
+      //     duration: 3000,
+      //     isClosable: true,
+      //   });
+      // };
+    };
+  useEffect(() => {
+
+    // console.log("effect started");
+    // fetch("http://localhost:8026/todo", {
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
+    //   },
+    // })
+      // .then((res) => res.json())
+      // .then((res) => {
+        // setData(res);
+      // })
+      // .catch((er) => {
+      //   console.log(er);
+      // });
     const getAverageAge = () => {
       let sum = 0;
-      for (let i = 0; i < data.length; i++) {
+
+      for (let i = 0; i < data.length && data.length>0; i++) {
         sum += data[i].price * data[i].quantity;
       }
       setsum(sum);
     };
     getAverageAge();
-  }, [sumo]);
+    // console.log("effect ended");
+  }, []);
 
   function Update(value) {
     // Setfull([...full,value]);

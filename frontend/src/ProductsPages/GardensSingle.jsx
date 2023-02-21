@@ -21,15 +21,15 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
-import { storeData } from "../utils/localStorage";
+import { saveData, storeData } from "../utils/localStorage";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const GardenSingle = () => {
   const [data, setData] = useState({});
   const [image, setImage] = useState();
-
+const datam = useSelector((state)=>state.cartData)
   const { id } = useParams();
   const toast = useToast();
-
   React.useEffect(() => {
     axios
       .get(`https://stock-server.onrender.com/products/${id}`)
@@ -40,7 +40,7 @@ const GardenSingle = () => {
   }, []);
 
   const AddToCart = () => {
-    fetch("http://localhost:8025/todo/add", {
+    fetch("http://localhost:8026/todo/add",{
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -49,7 +49,9 @@ const GardenSingle = () => {
       },
     })
       .then((res) => res.json())
-      .then((res) => console.log(res))
+      .then((res) => {
+      saveData("Cart",data)
+      })
       .catch((er) => console.log(er));
     toast({
       title: "Added",

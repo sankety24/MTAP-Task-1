@@ -3,9 +3,6 @@ import { Slider } from "./Slider";
 import "./Homemodule.css";
 
 const Home = () => {
-
- 
-
   return (
     <div>
       <center>Homepage</center>

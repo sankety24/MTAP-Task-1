@@ -55,7 +55,7 @@ function Navbar() {
     };
 
     axios
-      .post("http://localhost:8025/signup", payload)
+      .post("http://localhost:8026/signup", payload)
       .then((res) => navigate("/"))
       .catch((er) => console.log(er));
   }
@@ -77,7 +77,7 @@ function Navbar() {
       });
     } else {
       // fetch("https://viridian-python-wrap.cyclic.app/login", {
-      fetch("http://localhost:8025/login", {
+      fetch("http://localhost:8026/login", {
 
         
         method: "POST",
@@ -114,7 +114,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8025/todo", {
+    fetch("http://localhost:8026/todo", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
       },
@@ -122,7 +122,7 @@ function Navbar() {
       .then((res) => res.json())
       .then((res) => {
         setCart(res);
-        console.log(res);
+        // console.log(res);
       })
       .catch((er) => {
         console.log(er);
@@ -130,7 +130,7 @@ function Navbar() {
   }, []);
 
   
-  console.log(data);
+  // console.log(data);
   React.useEffect(() => {
     if (query) {
       setTimeout(() => {
@@ -149,10 +149,6 @@ function Navbar() {
   }, [query]);
   return (
     <div>
-      {/* banner */}
-     
-
-      {/* Sign-In/sign-up part */}
 
       <div
         className="d-flex justify-content-end align-items-center py-1"

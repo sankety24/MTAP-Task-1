@@ -12,9 +12,7 @@ const Clothes = () => {
   const [error, setError] = useState(false);
   const fetchData = (page) => {
     axios
-      .get(
-        `https://dataapi.onrender.com/cloths?_limit=12&_page=${page}`
-      )
+      .get(`https://dataapi.onrender.com/cloths?_limit=12&_page=${page}`)
       .then((e) => {
         setLoading(true);
         console.log(e);
@@ -71,9 +69,7 @@ const Clothes = () => {
   };
   return (
     <div>
-      
       <div className="main">
-        
         <div className="product">
           <div className="product-child1">
             <p>

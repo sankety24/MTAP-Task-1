@@ -23,10 +23,16 @@ import { useParams, Link } from "react-router-dom";
 import { MdAddShoppingCart } from "react-icons/md";
 import { storeData } from "../utils/localStorage";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { add_to_bag } from "../Redux/action";
+
 const ClothesSingle = () => {
   const [data, setData] = useState({});
   const [image, setImage] = useState();
-
+  // const [state, setState] = useState(false);
+  const dispatch = useDispatch();
+  // const datam = useSelector((state) => state.cartData);
+  
   const { id } = useParams();
   const toast = useToast();
 
@@ -35,13 +41,16 @@ const ClothesSingle = () => {
       .get(`https://dataapi.onrender.com/cloths/${id}`)
       .then((res) => {
         setData(res.data);
-        console.log(res.data);
+        // datam(res.data)
+        dispatch(add_to_bag(res.data));
       })
       .catch((error) => console.log(error));
+  // console.log(datam);
+
   }, []);
 
   const AddToCart = () => {
-    fetch("http://localhost:8025/todo/add", {
+    fetch("http://localhost:8026/todo/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -49,18 +58,18 @@ const ClothesSingle = () => {
         Authorization: `Bearer ${localStorage.getItem("psctoken")}`,
       },
     })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((er) => console.log(er));
+    .then((res) => res.json())
+    .then((res) => console.log(res))
+    .catch((er) => console.log(er));
     toast({
       title: "Added",
       status: "success",
       duration: 3000,
       isClosable: true,
     });
-    console.log(data);
   };
-
+  // console.log(datam);
+  
   return (
     <Wrap spacing={10} justify="center" marginTop="60px">
       <HStack spacing={5}>

@@ -9,12 +9,6 @@ function loadData (key){
     }
 }
 
-function saveData(key,data){
-    localStorage.setItem(key,JSON.stringify(data))
-}
-
-
-
 function present(arr, value) {
     for (var i = 0; i < arr.length; i++) {
       if (value.name === arr[i].name) {
@@ -27,17 +21,20 @@ function present(arr, value) {
   const storeData = (key, value) => {
     let data = JSON.parse(localStorage.getItem(key)) || [];
     console.log(data);
-    // if (!present(data, value)) {
       localStorage.setItem(key, JSON.stringify([...data, value]));
-    // }
+  };
+  
+  const saveData = (key, value) => {
+    let data = JSON.parse(localStorage.getItem(key)) || [];
+    if (!present(data, value)) {
+      localStorage.setItem(key, JSON.stringify([...data, value]));
+    }
   };
   
   const getData = (key) => {
     let cart = JSON.parse(localStorage.getItem(key)) || [];
     return cart;
   };
-  
-  
   const deleteData=(name,key)=>{
     let data= JSON.parse(localStorage.getItem(key));
       if(data.length===1){

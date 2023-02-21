@@ -39,7 +39,7 @@ const FurnitureSingle = () => {
   }, []);
 
   const AddToCart = () => {
-    fetch("http://localhost:8025/todo/add", {
+    fetch("http://localhost:8026/todo/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
